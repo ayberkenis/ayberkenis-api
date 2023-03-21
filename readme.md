@@ -2,7 +2,29 @@
 
 #### AyberkEnis API is a free and open source API that allows you to download videos from YouTube, Twitter, Instagram, and TikTok. 
 
-As mentioned above, this API is free and open source. You can use it for free and you can also contribute to the project. If you want to contribute, you can fork the project and make a pull request. If you want to use the API, you can use the API endpoint below.
+As mentioned above, this API is free and open source. You can use it for free, and you can also contribute to the project. If you want to contribute, you can fork the project and make a pull request. If you want to use the API, you can use the API endpoint below.
+
+
+#### Known Issues
+
+Majority of the issues are related with the chrome extension. If you want to use the API, you can use the API endpoints below without extension. There shouldn't be any issues with the API itself.
+
+- `Download Video` button might not appear on YouTube videos. This is a known issue, and it will be fixed soon. It has something to do with how YouTube renders the DOM.
+- Even though API is down, Chrome extension still lets you download videos which is not intended.
+- TikTok videos will be downloaded with watermark even though you select `noWatermark` option. This is a known issue but workaround is not available yet for TikTok's anti-scraping mechanism. So, It might take a while to fix this issue as it is not related with the repository.
+
+#### Roadmap
+
+- [x] YouTube Downloader
+- [x] Twitter Downloader
+- [x] Instagram Downloader
+- [x] TikTok Downloader
+- [ ] Add more downloaders (Facebook, Reddit, etc.)
+- [ ] Options Page (Chrome Extension)
+- [ ] Fix known issues
+- [ ] Add more customizations for the Chrome Extension (Download location, etc.)
+- [ ] Add more download options for the Chrome Extension (Download audio only, etc.)
+
 
 ## Base Endpoint
 > ```http
@@ -74,6 +96,12 @@ GET /api/v1/download/tiktok/<identifier>
 | quality    | string | 144p, 240p, 360p, 480p, 720p, 1080p, 1440p, 2160p, best |   [X]    |
 | noWatermark| bool   | true, false                                             |   [X]    |
 
+
+----
+
+## Contributing
+
+You can contribute to the project by forking the project and making a pull request. If you want to contribute, you can contact me on [Twitter](https://twitter.com/ayberkenis).
 
 ## License
 
