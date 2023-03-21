@@ -5,20 +5,23 @@ var SaveTweetVid = function () {
 
     function downloadVideo(statusId, elem) {
         console.log('Download started');
+
+
         elem.html('<i class="fa-solid fa-download"></i> Downloading...');
         chrome.runtime.sendMessage({id: statusId, source: 'twitter'}, function (response) {
-            console.log(response)
+            if (response.message === '_api_down') {
+                console.log('Download error');
+                elem.html('<i class="fa-solid fa-xmark-large"></i> API DOWN');
+            }
             if (response.message == 'Download finished') {
                 console.log('Download finished');
-                elem.html('<i class="fa-solid fa-download"></i> Download Video');
-            } else if (response.message == 'Download failed') {
-                console.log('Download failed');
-                elem.html('<i class="fa-solid fa-download"></i> Download Video');
+                elem.html('<i class="fa-solid fa-download"></i> Download');
             } else {
                 console.log('Download error');
-                elem.html('<i class="fa-solid fa-download"></i> Download Video');
+                elem.html('<i class="fa-solid fa-download"></i> Download');
             }
         });
+
     }
 
     function insertDownloadLink() {

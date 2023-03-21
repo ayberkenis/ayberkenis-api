@@ -1,11 +1,10 @@
 var youtubeDownloader = function () {
     console.log('[1] init fire');
 
-    function checkIfUserIsOnYoutubeWebsite() {
-        return -1 != document.location.href.indexOf('youtube.com/') || -1 != document.location.href.indexOf('youtube.com/');
-    }
 
     function downloadVideo(statusId, elem) {
+        console.log('Download started');
+
         elem.html('<i class="fa-solid fa-download"></i> Downloading...');
         chrome.runtime.sendMessage({id: statusId, source: 'youtube'}, function (response) {
             if (response.message == 'Download finished') {

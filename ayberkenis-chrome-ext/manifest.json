@@ -15,6 +15,13 @@
     "page": "options.html",
     "open_in_tab": true
   },
+  "host_permissions": [
+    "https://twitter.com/*",
+    "https://www.youtube.com/*",
+    "http://127.0.0.1:5000/*",
+    "http://ayberkenis.com.tr/*",
+    "http://127.0.0.1:5000/api/v1/status"
+  ],
 "background": {
     "service_worker": "background.js"
   },

@@ -1,6 +1,8 @@
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     console.log('message received')
     console.log(message);
+
+
     let baseUrl = `http://127.0.0.1:5000/api/v1/downloader/${message.source}/`
     let url = baseUrl + message.id;
     const downloadOptions = {
