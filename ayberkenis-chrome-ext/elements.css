@@ -1,0 +1,89 @@
+.ae-twitter-div.css-1dbjc4n.r-18u37iz.r-1h0z5md {
+    margin: 5px;
+    padding-top: 5px;
+    margin-left: -10px;
+}
+
+.ae-twitter-downloader {
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    font-family: "TwitterChirp",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.ae-twitter-downloader:hover {
+    text-decoration: underline;
+}
+
+
+.ae-youtube-div {
+    margin: 5px;
+    padding: 10px 20px;
+    width: auto;
+    height: auto;
+    background-color: crimson;
+    color: white;
+    font-weight: bold;
+    border-radius: 18px;
+    font-size: 1.5rem;
+        cursor: pointer;
+
+}
+.ae-youtube-downloader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+        cursor: pointer;
+}
+
+.ae-youtube-shorts-div {
+
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+        cursor: pointer;
+    border-radius: 50%;
+    width: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    height: 5rem;
+
+}
+
+.ae-youtube-shorts-div:hover {
+    text-decoration: underline;
+}
+
+.ae-youtube-shorts-downloader {
+    color: white;
+}
+
+/* animation pulse */
+.ae-youtube-shorts-downloading {
+    animation: pulse 2s infinite;
+}
+
+
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        background-color: black;
+    }
+    50% {
+        transform: scale(1.010);
+        background-color: green;
+    }
+    100% {
+        transform: scale(1);
+        background-color: black;
+    }
+}
+

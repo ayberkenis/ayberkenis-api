@@ -1,0 +1,49 @@
+{
+  "name": "Aeterna",
+  "version": "1.0",
+  "description": "Aeterna is a Chrome extension that allows you to download videos from various sources. Uses ayberkenis-api.",
+  "manifest_version": 3,
+  "permissions": [
+    "downloads",
+    "activeTab",
+    "storage",
+    "tabs",
+    "webRequest"
+
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+"background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://twitter.com/*", "*://youtube.com/*"
+      ],
+      "js": [
+        "jquery-3.6.4.min.js" ,"src/twitter.js", "fontawesome.js"
+      ],
+      "css": [
+        "elements.css"
+      ],
+    "run_at": "document_end"
+
+    },
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "jquery-3.6.4.min.js", "src/youtube.js" , "fontawesome.js"
+      ],
+      "css": [
+        "elements.css"
+      ],
+    "run_at": "document_end"
+
+    }
+  ]
+}
