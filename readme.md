@@ -1,4 +1,11 @@
 # AyberkEnis API
+![License](https://img.shields.io/github/license/ayberkenis/ayberkenis-api?style=flat-square)
+![Discord](https://img.shields.io/discord/1029242783954894908?style=flat-square)
+![Last Commit](https://img.shields.io/github/last-commit/ayberkenis/ayberkenis-api?style=flat-square)
+![Build](https://img.shields.io/github/checks-status/ayberkenis/ayberkenis-api/master?style=flat-square)
+![API](https://img.shields.io/website?down_message=down&style=flat-square&up_message=up%20and%20running&url=https%3A%2F%2Fayberkenis.com.tr/api/v1/status)
+![Issues](https://img.shields.io/github/issues/ayberkenis/ayberkenis-api?style=flat-square)
+![PRs](https://img.shields.io/github/issues-pr/ayberkenis/ayberkenis-api?style=flat-square)
 
 #### AyberkEnis API is a free and open source API that allows you to download videos from YouTube, Twitter, Instagram, and TikTok. 
 
