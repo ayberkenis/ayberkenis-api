@@ -1,6 +1,6 @@
 {
   "name": "Aeterna",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "Aeterna is a Chrome extension that allows you to download videos from various sources. Uses ayberkenis-api.",
   "manifest_version": 3,
   "permissions": [

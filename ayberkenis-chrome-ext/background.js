@@ -1,20 +1,21 @@
+
+
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     console.log('message received')
     console.log(message);
 
-
     let baseUrl = `http://127.0.0.1:5000/api/v1/downloader/${message.source}/`
     let url = baseUrl + message.id;
-    const downloadOptions = {
-        url: url,
-        method: 'GET',
-        saveAs: true,
-        headers: [
-            {name: 'Content-Type', value: 'application/json'}
-        ]
-    };
+            const downloadOptions = {
+            url: url,
+            method: 'GET',
+            saveAs: true,
+            headers: [
+                {name: 'Content-Type', value: 'application/json'}
+            ]
+        };
 
-    chrome.downloads.download(downloadOptions, function(downloadId) {
+    chrome.downloads.download(downloadOptions, function (downloadId) {
         chrome.downloads.onChanged.addListener(function downloadListener(downloadDelta) {
             console.log(downloadDelta);
             if (downloadDelta.id === downloadId && downloadDelta.state) {

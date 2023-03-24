@@ -1,3 +1,53 @@
+/* OPTIONS */
+body.options {
+    background-color: #1a1a1a;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    padding: 0;
+    margin: 0;
+}
+
+
+/* OPTIONS END */
+
+/* v1.1 */
+.aeterna-slide-in-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 999999;
+    background-color: #1a1a1a;
+    color: white;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    border-radius: 0 0 0 0.5rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    transition: all 0.5s ease;
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.aeterna-slide-in-menu-button {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    z-index: 1000000;
+    background-color: #1a1a1a;
+    color: white;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    border-radius: 0 0 0 0.5rem;
+    cursor: pointer;
+}
+/* v1.1 END */
 .ae-twitter-div.css-1dbjc4n.r-18u37iz.r-1h0z5md {
     margin: 5px;
     padding-top: 5px;
@@ -21,8 +71,7 @@
 
 
 .ae-youtube-div {
-    margin: 5px;
-    padding: 10px 20px;
+    padding: 10px 10px;
     width: auto;
     height: auto;
     background-color: crimson;
@@ -30,14 +79,16 @@
     font-weight: bold;
     border-radius: 18px;
     font-size: 1.5rem;
-        cursor: pointer;
-
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 .ae-youtube-downloader {
     display: flex;
     justify-content: center;
     align-items: center;
-        cursor: pointer;
+    cursor: pointer;
+    gap: 1rem;
 }
 
 .ae-youtube-shorts-div {
