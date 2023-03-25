@@ -1,15 +1,24 @@
-const downloadDirectoryInput = document.getElementById('download-directory');
-const saveButton = document.getElementById('save-button');
-
-chrome.storage.sync.get('downloadDirectory', (data) => {
-  if (data.downloadDirectory) {
-    downloadDirectoryInput.value = data.downloadDirectory;
-  }
-});
-
-saveButton.addEventListener('click', () => {
-  const downloadDirectory = downloadDirectoryInput.value;
-  chrome.storage.sync.set({ downloadDirectory }, () => {
-    alert('Settings saved');
-  });
+document.addEventListener('DOMContentLoaded', function () {
+    const selectElement = document.getElementById('api-path-select');
+    const statusElement = document.getElementById('api-status');
+    console.log(selectElement);
+    chrome.storage.sync.get('apiPath', function (data) {
+        // Set the default selected option based on the saved value
+        console.log(selectElement.value)
+        console.log(data)
+        if (data.apiPath === 'local') {
+            selectElement.value = 'local';
+        } else if (data.apiPath === 'production') {
+            selectElement.value = 'production';
+        }
+    });
+    fetch('https://ayberkenis.com.tr/api/v1/status')
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === 'OK') {
+                statusElement.innerHTML = '<span class="badge bg-success">Online</span>';
+            } else {
+                statusElement.innerHTML = '<span class="badge bg-danger">Offline</span>';
+            }
+        });
 });

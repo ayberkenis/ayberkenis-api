@@ -6,8 +6,11 @@ from flask import send_file, request
 
 from .exceptions import YoutubeVideoNotAvailable, TwitterVideoNotAvailable, InstagramVideoNotAvailable, TiktokVideoNotAvailable
 from .parsers import Parsers
+from configparser import ConfigParser
 
 p = Parsers()
+cfg = ConfigParser(interpolation=None)
+cfg.read('config.ini')
 
 
 class Downloader:
@@ -21,7 +24,7 @@ class Downloader:
         Args:
             twitter_bearer:
         """
-        self.token = twitter_bearer or environ.get('twitter_bearer')
+        self.token = twitter_bearer or cfg['AUTHORIZATION']['twitter_bearer']
         self.api = tweepy.Client(self.token)
 
     @staticmethod
@@ -58,7 +61,7 @@ class Downloader:
             file, tweet = p.get_twitter_video_by_id(self.api, identifier)
             return send_file(file, download_name=f"twitter-{tweet.includes['users'][0]['username']}-{identifier}.mp4", as_attachment=True)
         except Exception as e:
-            raise TwitterVideoNotAvailable('Twitter video is not available. Please check the identifier and try again. If the problem persists, please contact the developer.')
+            raise TwitterVideoNotAvailable('Twitter video is not available. Please check the identifier and try again. If the problem persists, please contact the developer.' + '\n' + str(e))
 
     def instagram_downloader(self, identifier: str = '', type: str = typing.Union['reels', 'p'], quality: str = None, extension: str = None) -> send_file:
         """

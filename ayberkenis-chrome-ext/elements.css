@@ -121,7 +121,27 @@ body.options {
     animation: pulse 2s infinite;
 }
 
+.ae-instagram-div {
+    padding: 10px 10px;
+    width: auto;
+    height: auto;
+    background-color: #e1306c;
+    color: white;
+    font-weight: bold;
+    border-radius: 18px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: 18px;
+    margin-right: 9px;
+}
 
+.ae-instagram-downloader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    gap: 1rem;
+}
 
 @keyframes pulse {
     0% {

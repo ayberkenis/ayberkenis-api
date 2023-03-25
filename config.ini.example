@@ -1,0 +1,2 @@
+[AUTHORIZATION]
+twitter_bearer = your bearer token here, more details https://developer.twitter.com/en/docs/authentication/oauth-2-0/bearer-tokens
