@@ -56,7 +56,9 @@
     </div>
     <div class="mt-2 mb-3 row" data-bs-theme="dark">
         <div class="col">
-            <select class="form-select" aria-label="Default select example" data-bs-theme="dark">
+                            <label for="resolution-select">All videos will be downloaded in the selected quality below.</label>
+            <select class="form-select" aria-label="Default select example" data-bs-theme="dark" id="resolution-select">
+
                 <option selected>Auto Resolution for Every Video</option>
                 <option value="best">Best Available</option>
                 <option value="2160p">2160p (4K)</option>
@@ -69,7 +71,8 @@
     </div>
     <div class="mt-2 mb-3 row" data-bs-theme="dark">
         <div class="col">
-            <select class="form-select" aria-label="Default select example" data-bs-theme="dark">
+            <label for="video-format-select">All videos will be downloaded in the selected video format below. </label>
+            <select class="form-select" aria-label="Video format Select" data-bs-theme="dark" id="video-format-select">
                 <option selected>Auto Format for Every Video</option>
                 <option value="mp4">mp4</option>
                 <option value="mkv">mkv</option>
@@ -78,7 +81,9 @@
                 <option value="3gp">3gp</option>
 
             </select>
-            <select class="form-select " aria-label="Default select example" data-bs-theme="dark">
+            <br>
+            <label for="audio-format-select">All videos will be downloaded in the selected audio format below.</label>
+            <select class="form-select " aria-label="Audio format select" data-bs-theme="dark" id="audio-format-select">
                 <option selected>Auto Format for Every Audio</option>
                 <option value="mp3">mp3</option>
                 <option value="wav">wav</option>
@@ -90,7 +95,7 @@
 </div>
 
 <div class="footer">
-    <small> 2023 AyberkEnis. I Love Foss.</small>
+    <small> 2023 AyberkEnis. I Love Foss. | <a href="https://github.com/ayberkenis/ayberkenis-api"> Contribute on GitHub</a></small>
 </div>
 </body>
 </html>

@@ -1,14 +1,17 @@
 var YouTubeDownloader = function () {
 
     function getVideoId() {
+        // Get video ID from URL
         return document.URL.match(/v=([^&]+)/)[1];
     }
 
     function getShortsId() {
+        // Get shorts ID from URL
         return document.URL.match(/shorts\/([^&]+)/)[1];
     }
 
     function insertDownloadLink(container, type) {
+        // Insert download button, if it is not already inserted
         let statusId;
         let wrapperClassName;
         let downloaderClassName;
@@ -49,6 +52,7 @@ var YouTubeDownloader = function () {
     }
 
     function downloadVideo(statusId, elem, type) {
+        // Send message to background script to download video
         if (type === 'shorts') {
             elem.parent().addClass('ae-youtube-shorts-downloading');
         } else if (type === 'video') {
@@ -76,6 +80,7 @@ var YouTubeDownloader = function () {
 
 
     function checkDOMEveryInterval() {
+        // Check if the DOM has elements every 500ms
         const interval = setInterval(function () {
             const currentURL = window.location.href;
             const storedURL = localStorage.getItem('currentURL');
@@ -85,8 +90,12 @@ var YouTubeDownloader = function () {
                 localStorage.setItem('buttonInserted', 'false');
                 localStorage.setItem('currentURL', currentURL);
             }
-            if (localStorage.getItem('buttonInserted') === 'false') {
-
+            if (localStorage.getItem('buttonInserted') === 'false' && currentURL.includes('watch?v=') || currentURL.includes('shorts/')) {
+                // If the button is not inserted and the URL is a video or shorts URL
+                // Find the container and insert the button
+                // Set buttonInserted to true
+                // We need to check for both video and shorts because the DOM is different
+                // We also need to check if url contains watch?v= or shorts/ to avoid inserting buttons or calling unnecessary functions
                 console.log('[1] trying to find element...')
                 console.log('buttonInserted: ', localStorage.getItem('buttonInserted'))
                 const videoActionsContainer = $('.style-scope.ytd-menu-renderer[button-renderer=true]:first');
@@ -109,12 +118,14 @@ var YouTubeDownloader = function () {
 }
 
 $(window).on('load', function () {
+    // Clear localStorage and set buttonInserted to false on page load
     localStorage.clear();
     localStorage.setItem('buttonInserted', 'false');
     YouTubeDownloader();
 
     // Add event listener for URL changes
     window.addEventListener('hashchange', function () {
+        // As YouTube DOM is manipulated on certain events, we need to clear localStorage and set buttonInserted to false
         localStorage.clear();
         localStorage.setItem('buttonInserted', 'false');
     });

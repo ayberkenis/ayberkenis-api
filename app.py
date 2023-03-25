@@ -5,8 +5,10 @@ from core.exceptions import YoutubeVideoNotAvailable, TwitterVideoNotAvailable, 
     InstagramVideoNotAvailable, TiktokVideoNotAvailable
 from core.ops import Downloader
 from core.response import APIResponse
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 limiter = Limiter(
     get_remote_address,
     app=app,
@@ -29,7 +31,15 @@ def hello_world():
     return render_template('index.html')
 
 
-@app.route('/api/v1/downloader/youtube/<identifier>', methods=['GET'])
+@app.route('/status')
+def status():
+    """
+    Render the status page
+    :return:
+    """
+    return jsonify(APIResponse(200, "OK").to_dict())
+
+@app.route('/downloader/youtube/<identifier>', methods=['GET'])
 @limiter.limit("1 per second")
 def youtube(identifier):
     """
@@ -54,7 +64,7 @@ def youtube(identifier):
     return d.youtube_downloader(identifier, quality, extension)
 
 
-@app.route('/api/v1/downloader/twitter/<identifier>', methods=['GET'])
+@app.route('/downloader/twitter/<identifier>', methods=['GET'])
 @limiter.limit("1 per second")
 def twitter(identifier):
     """
@@ -69,7 +79,7 @@ def twitter(identifier):
     print(request.data)
     return d.twitter_downloader(identifier)
 
-@app.route('/api/v1/downloader/instagram/<type>/<identifier>', methods=['GET'])
+@app.route('/downloader/instagram/<type>/<identifier>', methods=['GET'])
 @limiter.limit("1 per second")
 def instagram(type, identifier):
     """
@@ -82,7 +92,7 @@ def instagram(type, identifier):
     """
     return d.instagram_downloader(identifier, type)
 
-@app.route('/api/v1/downloader/tiktok/<identifier>', methods=['GET'])
+@app.route('/downloader/tiktok/<identifier>', methods=['GET'])
 @limiter.limit("1 per second")
 def tiktok(identifier):
     """
