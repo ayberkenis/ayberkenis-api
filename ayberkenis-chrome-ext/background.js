@@ -26,18 +26,21 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                 console.log(downloadDelta);
                 if (downloadDelta.id === downloadId && downloadDelta.state) {
                     if (downloadDelta.state.current === "complete") {
-                        console.log('Download completed');
-                        sendResponse({message: 'Download finished', sender: sender});
+
+                        sendResponse({message: 'finished', sender: sender});
                         chrome.downloads.onChanged.removeListener(downloadListener);
-                    } else if (downloadDelta.state.current === "interrupted" && downloadDelta.error) {
-                        console.log(`Download failed: ${downloadDelta.error}`);
-                        sendResponse({message: 'Download failed'});
+                    } else if (downloadDelta.error && downloadDelta.error.current === 'USER_CANCELED') {
+                        sendResponse({message: 'cancelled', sender: sender});
+                        chrome.downloads.onChanged.removeListener(downloadListener);
+                    }
+                    else if (downloadDelta.state.current === "interrupted") {
+                        sendResponse({message: 'failed', sender: sender});
                         chrome.downloads.onChanged.removeListener(downloadListener);
                     }
                 }
             });
         });
 
-        return true;
     });
+    return true;
 });

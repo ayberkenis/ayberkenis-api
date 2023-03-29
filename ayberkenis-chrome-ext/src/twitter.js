@@ -1,3 +1,4 @@
+
 var SaveTweetVid = function () {
     function checkIfUserIsOnTwitterWebsite() {
         return -1 != document.location.href.indexOf('twitter.com/') || -1 != document.location.href.indexOf('twitter.com/');
@@ -9,16 +10,24 @@ var SaveTweetVid = function () {
 
         elem.html('<i class="fa-solid fa-download"></i> Downloading...');
         chrome.runtime.sendMessage({id: statusId, source: 'twitter'}, function (response) {
+
+            console.log(response);
             if (response.message === '_api_down') {
                 console.log('Download error');
                 elem.html('<i class="fa-solid fa-xmark-large"></i> API DOWN');
             }
-            if (response.message == 'Download finished') {
-                console.log('Download finished');
-                elem.html('<i class="fa-solid fa-download"></i> Download');
-            } else {
-                console.log('Download error');
-                elem.html('<i class="fa-solid fa-download"></i> Download');
+            if (response.message == 'finished') {
+                                elem.html('<i class="fa-solid fa-download"></i> Download Finished');
+                setTimeout(function () {
+                    elem.html('<i class="fa-solid fa-download"></i> Download');
+                }, 1000);
+            } else if (response.message == 'cancelled') {
+                elem.html('<i class="fa-solid fa-download"></i> Download Cancelled');
+                setTimeout(function () {
+                    elem.html('<i class="fa-solid fa-download"></i> Download');
+                }, 1000);
+            } else if (response.message == 'in_progress') {
+                elem.html('<i class="fa-solid fa-download"></i> Downloading...');
             }
         });
 

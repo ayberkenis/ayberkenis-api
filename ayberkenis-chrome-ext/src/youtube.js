@@ -11,45 +11,32 @@ var YouTubeDownloader = function () {
     }
 
     function insertDownloadLink(container, type) {
-        // Insert download button, if it is not already inserted
-        let statusId;
-        let wrapperClassName;
-        let downloaderClassName;
-        let downloadLink;
-        if (type === 'video') {
-            statusId = getVideoId();
-            wrapperClassName = 'ae-youtube-div';
-            downloaderClassName = 'ae-youtube-downloader';
-            downloadLink = $(`
-<div class="${wrapperClassName}">
-  <a class="${downloaderClassName}" title="Download">
-    <i class="fa-solid fa-download"></i> Download
-  </a>
-</div>
-`);
+  // Check if download button has already been inserted
+  let downloadLink = container.parent().find(`.${type === 'video' ? 'ae-youtube-div' : 'ae-youtube-shorts-div'} .${type === 'video' ? 'ae-youtube-downloader' : 'ae-youtube-shorts-downloader'}`);
+  if (downloadLink.length) {
+    // If download button already exists, update its click event listener
+    downloadLink.click(function () {
+      downloadVideo(type === 'video' ? getVideoId() : getShortsId(), $(this), type);
+    });
+  } else {
+    // If download button doesn't exist, insert a new one
+    const wrapperClassName = type === 'video' ? 'ae-youtube-div' : 'ae-youtube-shorts-div';
+    const downloaderClassName = type === 'video' ? 'ae-youtube-downloader' : 'ae-youtube-shorts-downloader';
+    downloadLink = $(`
+      <div class="${wrapperClassName}">
+        <a class="${downloaderClassName}" title="Download">
+          <i class="fa-solid fa-download"></i>${type === 'video' ? ' Download' : ''}
+        </a>
+      </div>
+    `);
+    downloadLink.find(`a.${downloaderClassName}`).click(function () {
+      downloadVideo(type === 'video' ? getVideoId() : getShortsId(), $(this), type);
+    });
+    container.after(downloadLink);
+  }
+  localStorage.setItem('buttonInserted', 'true');
+}
 
-        } else if (type === 'shorts') {
-            statusId = getShortsId();
-            wrapperClassName = 'ae-youtube-shorts-div';
-            downloaderClassName = 'ae-youtube-shorts-downloader';
-            downloadLink = $(`
-<div class="${wrapperClassName}">
-    <a class="${downloaderClassName}" title="Download">
-        <i class="fa-solid fa-download"></i>
-    </a>
-</div>
-`);
-        }
-
-        container.parent().find(`.${wrapperClassName}`).remove();
-        downloadLink.find(`a.${downloaderClassName}`).click(function () {
-            downloadVideo(statusId, $(this), type);
-        });
-
-        container.after(downloadLink);
-        localStorage.setItem('buttonInserted', 'true');
-
-    }
 
     function downloadVideo(statusId, elem, type) {
         // Send message to background script to download video
@@ -59,16 +46,13 @@ var YouTubeDownloader = function () {
             elem.html('<i class="fa-solid fa-download"></i> Downloading...');
         }
         chrome.runtime.sendMessage({id: statusId, source: 'youtube'}, function (response) {
-
-            if (response.message === 'Download finished') {
-                console.log('Download finished');
+            if (response.message === 'finished') {
                 if (type === 'video') {
                     elem.html('<i class="fa-solid fa-download"></i> Download');
                 } else if (type === 'shorts') {
                     elem.parent().removeClass('ae-youtube-shorts-downloading');
                 }
             } else {
-                console.log('Download error');
                 if (type === 'video') {
                     elem.html('<i class="fa-solid fa-download"></i> Download');
                 } else if (type === 'shorts') {
@@ -96,7 +80,7 @@ var YouTubeDownloader = function () {
                 // Set buttonInserted to true
                 // We need to check for both video and shorts because the DOM is different
                 // We also need to check if url contains watch?v= or shorts/ to avoid inserting buttons or calling unnecessary functions
-                console.log('[1] trying to find element...')
+                console.log('trying to find element...')
                 console.log('buttonInserted: ', localStorage.getItem('buttonInserted'))
                 const videoActionsContainer = $('.style-scope.ytd-menu-renderer[button-renderer=true]:first');
                 const shortsActionsContainer = $('div.button-container.style-scope.ytd-reel-player-overlay-renderer:nth-of-type(4)').after();

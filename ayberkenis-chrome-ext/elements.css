@@ -143,6 +143,18 @@ body.options {
     gap: 1rem;
 }
 
+select.form-select {
+    color: black;
+}
+
+input.form-check-input, input.form-control {
+    color: black;
+}
+
+input.form-check-input::placeholder {
+    color: black;
+}
+
 @keyframes pulse {
     0% {
         transform: scale(1);
